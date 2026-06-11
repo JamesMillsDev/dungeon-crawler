@@ -1,0 +1,16 @@
+{
+	"Application": {
+		"Title": "Test Application",
+		"ContentFolder": "Content"
+	},
+	"Window": {
+		"Width": 1080,
+		"Height": 720,
+		"ClrColor": {
+			"r": 240,
+			"g": 240,
+			"b": 240,
+			"a": 255
+		}
+	}
+}
