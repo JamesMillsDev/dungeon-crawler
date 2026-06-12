@@ -4,6 +4,8 @@
 [Bb]uilds/
 [Ii]ntermediate/
 
+*.spv
+
 ### C++ ###
 # Prerequisites
 *.d

@@ -2,7 +2,6 @@
 
 #include <thread>
 
-#include "RenderCommand.h"
 #include "RenderCommandBuffer.h"
 #include "RenderSubmissionQueue.h"
 
