@@ -1,9 +1,16 @@
-#include <cstdlib>
-#include <iostream>
+#include "Application.h"
+#include "GameInstance.h"
 
-int main(int argC, char* argV[])
+class TestGameInstance : public GameInstance
 {
-	std::cout << "Hello, World!\n";
+public:
+	void Init() override{}
+	void Shutdown() override{}
+	void Tick(float dt) override{}
+	void Render() override{}
+};
 
-	return EXIT_SUCCESS;
+int main()
+{
+	return static_cast<int>(Application::Open<TestGameInstance>());
 }

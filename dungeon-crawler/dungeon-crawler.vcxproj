@@ -103,7 +103,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /q "$(SolutionDir)Dependencies\native\" "$(OutDir)"
-xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
+xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"
+xcopy /y /q /s "$(ProjectDir)Config\" "$(OutDir)Config\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>"$(ProjectDir)CompileShaders.bat" "$(VULKAN_SDK)\Bin\glslc.exe" "$(ProjectDir)Shaders" "$(ProjectDir)Content\Shaders"</Command>
@@ -130,7 +131,8 @@ xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /q "$(SolutionDir)Dependencies\native\" "$(OutDir)"
-xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
+xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"
+xcopy /y /q /s "$(ProjectDir)Config\" "$(OutDir)Config\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>"$(ProjectDir)CompileShaders.bat" "$(VULKAN_SDK)\Bin\glslc.exe" "$(ProjectDir)Shaders" "$(ProjectDir)Content\Shaders"</Command>
@@ -153,7 +155,8 @@ xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /q "$(SolutionDir)Dependencies\native\" "$(OutDir)"
-xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
+xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"
+xcopy /y /q /s "$(ProjectDir)Config\" "$(OutDir)Config\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>"$(ProjectDir)CompileShaders.bat" "$(VULKAN_SDK)\Bin\glslc.exe" "$(ProjectDir)Shaders" "$(ProjectDir)Content\Shaders"</Command>
@@ -180,7 +183,8 @@ xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /q "$(SolutionDir)Dependencies\native\" "$(OutDir)"
-xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
+xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"
+xcopy /y /q /s "$(ProjectDir)Config\" "$(OutDir)Config\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>"$(ProjectDir)CompileShaders.bat" "$(VULKAN_SDK)\Bin\glslc.exe" "$(ProjectDir)Shaders" "$(ProjectDir)Content\Shaders"</Command>
@@ -188,6 +192,9 @@ xcopy /y /q /s "$(ProjectDir)Content\" "$(OutDir)Content\"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\Engine.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

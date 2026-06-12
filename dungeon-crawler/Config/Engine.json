@@ -1,7 +1,7 @@
 {
 	"Application": {
-		"Title": "Test Application",
-		"ContentFolder": "Content"
+		"Title": "Dungeon Crawler (tm)",
+		"Version": [ 0, 0, 1 ]
 	},
 	"Window": {
 		"Width": 1080,
@@ -11,6 +11,11 @@
 			"g": 240,
 			"b": 240,
 			"a": 255
-		}
+		},
+		"Resizable": false
+	},
+	"Engine": {
+		"Title": "TinyVulkan",
+		"Version": [ 0, 0, 1 ]
 	}
 }

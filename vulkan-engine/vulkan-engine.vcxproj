@@ -19,10 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Utility\Config.h" />
+    <ClInclude Include="Utility\Version.h" />
+    <ClInclude Include="Vulkan\VulkanCommon.h" />
+    <ClInclude Include="Vulkan\VulkanInstance.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Graphics\Renderer.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
+    <ClCompile Include="Utility\Version.cpp" />
+    <ClCompile Include="Vulkan\VulkanInstance.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
