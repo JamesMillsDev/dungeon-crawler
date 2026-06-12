@@ -5,6 +5,7 @@
 [Ii]ntermediate/
 
 *.spv
+[Dd]ependencies/lib/vulkan-engine.*
 
 ### C++ ###
 # Prerequisites
