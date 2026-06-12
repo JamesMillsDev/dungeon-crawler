@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 #include "VulkanDevice.h"
+#include "Graphics/Mesh.h"
 #include "Graphics/Shader.h"
 
 using std::runtime_error;
@@ -56,10 +57,15 @@ void VulkanGraphicsPipeline::Create(const vector<initializer_list<ShaderInfo>>& 
 			shaderStages.emplace_back(stageCreateInfo);
 		}
 
+		auto bindingDescription = Vertex::GetBindingDescription();
+		auto attributeDescription = Vertex::GetAttributeDescriptions();
+
 		VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
 		vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-		vertexInputInfo.vertexBindingDescriptionCount = 0;
-		vertexInputInfo.vertexAttributeDescriptionCount = 0;
+		vertexInputInfo.vertexBindingDescriptionCount = 1;
+		vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescription.size());
+		vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+		vertexInputInfo.pVertexAttributeDescriptions = attributeDescription.data();
 
 		VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
 		inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;

@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
 #include "Window.h"
+#include "Graphics/Mesh.h"
 #include "Vulkan/VulkanCommandManager.h"
 #include "Vulkan/VulkanDevice.h"
 #include "Vulkan/VulkanGraphicsPipeline.h"
@@ -8,6 +9,9 @@
 #include "Vulkan/VulkanRenderPass.h"
 #include "Vulkan/VulkanSwapChain.h"
 #include "Vulkan/VulkanSyncObjects.h"
+#include "Vulkan/VulkanVertexBuffer.h"
+
+VulkanVertexBuffer* vertexBuffer = nullptr;
 
 Renderer::Renderer(Config* config, Window* window)
 	: m_window{ window },
@@ -22,6 +26,9 @@ Renderer::Renderer(Config* config, Window* window)
 
 Renderer::~Renderer()
 {
+	delete vertexBuffer;
+	vertexBuffer = nullptr;
+
 	delete m_syncObjects;
 	m_syncObjects = nullptr;
 
@@ -80,6 +87,11 @@ void Renderer::Initialise()
 
 	// Start the submission thread - runs until Cleanup() calls Shutdown()
 	m_submissionThread = std::thread{ &Renderer::SubmissionLoop, this };
+
+	vertexBuffer = new VulkanVertexBuffer{ sizeof(Vertex), vertices.size(), m_vulkanDevice };
+	vertexBuffer->Create();
+
+	vertexBuffer->Fill(vertices.data());
 }
 
 void Renderer::Cleanup()
@@ -95,6 +107,8 @@ void Renderer::Cleanup()
 	vkDeviceWaitIdle(m_vulkanDevice->Logical());
 
 	m_swapChain->Cleanup();
+
+	vertexBuffer->Cleanup();
 
 	m_syncObjects->Cleanup();
 	m_commandManager->Cleanup();

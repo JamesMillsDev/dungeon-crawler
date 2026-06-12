@@ -92,6 +92,12 @@
     <ClInclude Include="Renderer\RenderSubmissionQueue.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Mesh.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vulkan\VulkanVertexBuffer.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Config.cpp">
@@ -138,6 +144,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\RenderSubmissionQueue.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Mesh.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vulkan\VulkanVertexBuffer.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

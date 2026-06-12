@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Graphics\Shader.h" />
     <ClInclude Include="Renderer\RenderCommand.h" />
     <ClInclude Include="Renderer\RenderCommandBuffer.h" />
@@ -35,12 +36,14 @@
     <ClInclude Include="Renderer\Vulkan\VulkanStructs.h" />
     <ClInclude Include="Renderer\Vulkan\VulkanSwapChain.h" />
     <ClInclude Include="Renderer\Vulkan\VulkanSyncObjects.h" />
+    <ClInclude Include="Renderer\Vulkan\VulkanVertexBuffer.h" />
     <ClInclude Include="Utility\Config.h" />
     <ClInclude Include="Utility\Version.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
     <ClCompile Include="Renderer\RenderCommandBuffer.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
@@ -52,6 +55,7 @@
     <ClCompile Include="Renderer\Vulkan\VulkanRenderPass.cpp" />
     <ClCompile Include="Renderer\Vulkan\VulkanSwapchain.cpp" />
     <ClCompile Include="Renderer\Vulkan\VulkanSyncObjects.cpp" />
+    <ClCompile Include="Renderer\Vulkan\VulkanVertexBuffer.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
     <ClCompile Include="Utility\Version.cpp" />
     <ClCompile Include="Window.cpp" />

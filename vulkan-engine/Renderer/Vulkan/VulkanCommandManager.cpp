@@ -5,6 +5,8 @@
 
 #include "VulkanDevice.h"
 #include "VulkanStructs.h"
+#include "VulkanVertexBuffer.h"
+#include "Graphics/Mesh.h"
 
 using std::runtime_error;
 using std::thread;
@@ -82,7 +84,11 @@ void VulkanCommandManager::RecordCommand(
 	// Fallback draw while render commands are still being wired up
 	if (commands.empty())
 	{
-		vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+		VkBuffer vertexBuffers[] = { vertexBuffer->Get() };
+		VkDeviceSize offsets[] = { 0 };
+		vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
+
+		vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 	}
 
 	vkCmdEndRenderPass(commandBuffer);
