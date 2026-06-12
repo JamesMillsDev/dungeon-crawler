@@ -4,8 +4,8 @@
 #include <stdexcept>
 #include <GLFW/glfw3.h>
 
-#include "../Utility/Config.h"
-#include "../Utility/Version.h"
+#include "Utility/Config.h"
+#include "Utility/Version.h"
 
 using std::runtime_error;
 

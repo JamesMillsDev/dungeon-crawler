@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "VulkanDevice.h"
-#include "../Graphics/Shader.h"
+#include "Graphics/Shader.h"
 
 using std::runtime_error;
 

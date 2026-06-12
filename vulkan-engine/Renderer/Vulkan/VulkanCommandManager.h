@@ -1,10 +1,9 @@
 #pragma once
 
-#include <thread>
 #include <vector>
 
 #include "VulkanCommon.h"
-#include "../Graphics/RenderCommand.h"
+#include "Renderer/RenderCommand.h"
 
 using std::vector;
 

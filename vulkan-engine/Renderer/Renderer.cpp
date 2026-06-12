@@ -1,17 +1,13 @@
 #include "Renderer.h"
 
-#include <stdexcept>
-
-#include "../Window.h"
-#include "../Vulkan/VulkanCommandManager.h"
-#include "../Vulkan/VulkanDevice.h"
-#include "../Vulkan/VulkanGraphicsPipeline.h"
-#include "../Vulkan/VulkanInstance.h"
-#include "../Vulkan/VulkanRenderPass.h"
-#include "../Vulkan/VulkanSwapChain.h"
-#include "../Vulkan/VulkanSyncObjects.h"
-
-using std::runtime_error;
+#include "Window.h"
+#include "Vulkan/VulkanCommandManager.h"
+#include "Vulkan/VulkanDevice.h"
+#include "Vulkan/VulkanGraphicsPipeline.h"
+#include "Vulkan/VulkanInstance.h"
+#include "Vulkan/VulkanRenderPass.h"
+#include "Vulkan/VulkanSwapChain.h"
+#include "Vulkan/VulkanSyncObjects.h"
 
 Renderer::Renderer(Config* config, Window* window)
 	: m_window{ window },

@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <GLFW/glfw3.h>
 
-#include "Graphics/Renderer.h"
+#include "Renderer/Renderer.h"
 #include "Utility/Config.h"
 
 using std::runtime_error;

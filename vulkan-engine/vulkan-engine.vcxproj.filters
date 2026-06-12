@@ -21,10 +21,16 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{6ad21a24-0643-45b0-82c1-c5509e671735}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Vulkan">
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{bd2c604c-d922-4450-9534-2a2a681de901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{46bdcf04-9f36-4bd9-8656-1b398bd5826c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Vulkan">
       <UniqueIdentifier>{045ab148-b490-4818-9688-89b5919f97b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Vulkan">
+    <Filter Include="Source Files\Renderer\Vulkan">
       <UniqueIdentifier>{3dcb3773-bc22-4da8-a2be-063cf5089db5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -41,50 +47,50 @@
     <ClInclude Include="GameInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Renderer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanInstance.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanCommon.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\Version.h">
       <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanDevice.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanStructs.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanSwapChain.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanRenderPass.h">
-      <Filter>Header Files\Vulkan</Filter>
-    </ClInclude>
-    <ClInclude Include="Vulkan\VulkanGraphicsPipeline.h">
-      <Filter>Header Files\Vulkan</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Shader.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Vulkan\VulkanCommandManager.h">
-      <Filter>Header Files\Vulkan</Filter>
+    <ClInclude Include="Renderer\Vulkan\VulkanCommandManager.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="Vulkan\VulkanSyncObjects.h">
-      <Filter>Header Files\Vulkan</Filter>
+    <ClInclude Include="Renderer\Vulkan\VulkanCommon.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RenderSubmissionQueue.h">
-      <Filter>Header Files\Graphics</Filter>
+    <ClInclude Include="Renderer\Vulkan\VulkanDevice.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RenderCommand.h">
-      <Filter>Header Files\Graphics</Filter>
+    <ClInclude Include="Renderer\Vulkan\VulkanGraphicsPipeline.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RenderCommandBuffer.h">
-      <Filter>Header Files\Graphics</Filter>
+    <ClInclude Include="Renderer\Vulkan\VulkanInstance.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vulkan\VulkanRenderPass.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vulkan\VulkanStructs.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vulkan\VulkanSwapChain.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vulkan\VulkanSyncObjects.h">
+      <Filter>Header Files\Renderer\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderCommand.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderCommandBuffer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSubmissionQueue.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -97,41 +103,41 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Renderer.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Vulkan\VulkanInstance.cpp">
-      <Filter>Source Files\Vulkan</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\Version.cpp">
       <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Vulkan\VulkanDevice.cpp">
-      <Filter>Source Files\Vulkan</Filter>
-    </ClCompile>
-    <ClCompile Include="Vulkan\VulkanSwapchain.cpp">
-      <Filter>Source Files\Vulkan</Filter>
-    </ClCompile>
-    <ClCompile Include="Vulkan\VulkanRenderPass.cpp">
-      <Filter>Source Files\Vulkan</Filter>
-    </ClCompile>
-    <ClCompile Include="Vulkan\VulkanGraphicsPipeline.cpp">
-      <Filter>Source Files\Vulkan</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Shader.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Vulkan\VulkanCommandManager.cpp">
-      <Filter>Source Files\Vulkan</Filter>
+    <ClCompile Include="Renderer\Vulkan\VulkanCommandManager.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="Vulkan\VulkanSyncObjects.cpp">
-      <Filter>Source Files\Vulkan</Filter>
+    <ClCompile Include="Renderer\Vulkan\VulkanDevice.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RenderSubmissionQueue.cpp">
-      <Filter>Source Files\Graphics</Filter>
+    <ClCompile Include="Renderer\Vulkan\VulkanGraphicsPipeline.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RenderCommandBuffer.cpp">
-      <Filter>Source Files\Graphics</Filter>
+    <ClCompile Include="Renderer\Vulkan\VulkanInstance.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vulkan\VulkanRenderPass.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vulkan\VulkanSwapchain.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vulkan\VulkanSyncObjects.cpp">
+      <Filter>Source Files\Renderer\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderCommandBuffer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSubmissionQueue.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
