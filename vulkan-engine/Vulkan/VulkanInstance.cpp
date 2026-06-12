@@ -133,7 +133,7 @@ VulkanInstance::~VulkanInstance()
 	m_appVersion = nullptr;
 }
 
-void VulkanInstance::Initialise()
+void VulkanInstance::Create()
 {
 	if (ENABLE_VALIDATION_LAYERS && !CheckValidationLayerSupport())
 	{

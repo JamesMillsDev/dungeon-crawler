@@ -38,7 +38,7 @@ private:
 	~VulkanInstance();
 
 private:
-	void Initialise();
+	void Create();
 	void Cleanup();
 
 };

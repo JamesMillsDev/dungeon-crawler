@@ -13,6 +13,7 @@ class Config;
 class Window
 {
 	friend class Application;
+	friend class Renderer;
 
 private:
 	int m_width;
