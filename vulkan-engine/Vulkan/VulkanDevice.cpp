@@ -4,7 +4,12 @@
 #include <stdexcept>
 #include <string>
 
+#include "VulkanCommandManager.h"
+#include "VulkanSwapchain.h"
+#include "VulkanSyncObjects.h"
+
 using std::runtime_error;
+using std::scoped_lock;
 using std::set;
 using std::string;
 
@@ -25,9 +30,10 @@ bool VulkanDevice::CheckDeviceExtensionSupport(const VkPhysicalDevice device)
 	return requiredExtensions.empty();
 }
 
-VulkanDevice::VulkanDevice(const VkSurfaceKHR surface) :
-	m_physicalDevice{ VK_NULL_HANDLE }, m_logicalDevice{ VK_NULL_HANDLE }, m_graphicsQueue{ VK_NULL_HANDLE },
-	m_presentQueue{ VK_NULL_HANDLE }, m_surface{ surface }
+VulkanDevice::VulkanDevice(const VkSurfaceKHR surface)
+	: m_physicalDevice{ VK_NULL_HANDLE }, m_logicalDevice{ VK_NULL_HANDLE },
+	m_graphicsQueue{ VK_NULL_HANDLE }, m_presentQueue{ VK_NULL_HANDLE },
+	m_surface{ surface }
 {}
 
 QueueFamilyIndices VulkanDevice::FindQueueFamilies() const
@@ -101,12 +107,9 @@ void VulkanDevice::Create(const VkInstance& instance)
 
 	VkDeviceCreateInfo createInfo{};
 	createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-
 	createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
 	createInfo.pQueueCreateInfos = queueCreateInfos.data();
-
 	createInfo.pEnabledFeatures = &deviceFeatures;
-
 	createInfo.enabledExtensionCount = static_cast<uint32_t>(DEVICE_EXTENSIONS.size());
 	createInfo.ppEnabledExtensionNames = DEVICE_EXTENSIONS.data();
 
@@ -133,6 +136,85 @@ void VulkanDevice::Cleanup()
 {
 	vkDestroyDevice(m_logicalDevice, nullptr);
 	m_logicalDevice = nullptr;
+}
+
+AcquireResult VulkanDevice::AcquireNextImage(VulkanSyncObjects* syncObjects, const VulkanSwapChain* swapChain) const
+{
+	const uint32_t frameIndex = syncObjects->m_currentFrame.load();
+
+	vkWaitForFences(m_logicalDevice, 1, &syncObjects->m_inFlightFences[frameIndex], VK_TRUE, UINT64_MAX);
+
+	uint32_t imageIndex;
+	{
+		scoped_lock lock{ swapChain->m_accessMutex };
+		const VkResult result = vkAcquireNextImageKHR(
+			m_logicalDevice,
+			swapChain->m_swapChain,
+			UINT64_MAX,
+			syncObjects->m_imageAvailableSemaphores[frameIndex],
+			VK_NULL_HANDLE,
+			&imageIndex
+		);
+
+		if (result == VK_ERROR_OUT_OF_DATE_KHR)
+		{
+			throw runtime_error("Swap chain out of date - recreate required!");
+		}
+
+		if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		{
+			throw runtime_error("Failed to acquire swap chain image!");
+		}
+	}
+
+	syncObjects->m_currentFrame.store((frameIndex + 1) % MAX_FRAMES_IN_FLIGHT);
+	return { .imageIndex = imageIndex, .frameIndex = frameIndex };
+}
+
+void VulkanDevice::SubmitQueue(
+	const VulkanSyncObjects* syncObjects,
+	const vector<VkCommandBuffer>& commandBuffers,
+	const uint32_t imageIndex,
+	const uint32_t frameIndex,
+	const VulkanSwapChain* swapChain
+) const
+{
+	const VkFence& currentFence = syncObjects->m_inFlightFences[frameIndex];
+	const VkSemaphore& currentImageSemaphore = syncObjects->m_imageAvailableSemaphores[frameIndex];
+	const VkSemaphore& currentFinishedSemaphore = syncObjects->m_renderFinishedSemaphores[frameIndex];
+
+	vkResetFences(m_logicalDevice, 1, &currentFence);
+
+	VkSubmitInfo submitInfo{};
+	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+	submitInfo.waitSemaphoreCount = 1;
+	submitInfo.pWaitSemaphores = &currentImageSemaphore;
+	submitInfo.pWaitDstStageMask = waitStages;
+	submitInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
+	submitInfo.pCommandBuffers = commandBuffers.data();
+	submitInfo.signalSemaphoreCount = 1;
+	submitInfo.pSignalSemaphores = &currentFinishedSemaphore;
+
+	if (vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, currentFence) != VK_SUCCESS)
+	{
+		throw runtime_error("Failed to submit draw command buffer!");
+	}
+
+	VkPresentInfoKHR presentInfo{};
+	presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+	presentInfo.waitSemaphoreCount = 1;
+	presentInfo.pWaitSemaphores = &currentFinishedSemaphore;
+	VkSwapchainKHR swapChains[] = { swapChain->m_swapChain };
+	presentInfo.swapchainCount = 1;
+	presentInfo.pSwapchains = swapChains;
+	presentInfo.pImageIndices = &imageIndex;
+	presentInfo.pResults = nullptr;
+
+	{
+		scoped_lock lock{ swapChain->m_accessMutex };
+		vkQueuePresentKHR(m_presentQueue, &presentInfo);
+	}
 }
 
 QueueFamilyIndices VulkanDevice::FindQueueFamilies(const VkPhysicalDevice device) const
@@ -175,7 +257,6 @@ QueueFamilyIndices VulkanDevice::FindQueueFamilies(const VkPhysicalDevice device
 bool VulkanDevice::IsDeviceSuitable(const VkPhysicalDevice device) const
 {
 	const QueueFamilyIndices indices = FindQueueFamilies(device);
-
 	const bool extensionsSupported = CheckDeviceExtensionSupport(device);
 
 	bool swapChainAdequate = false;

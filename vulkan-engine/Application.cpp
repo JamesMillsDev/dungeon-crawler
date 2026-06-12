@@ -63,6 +63,7 @@ EExitCode Application::Run() const
 	while (!m_window->ShouldClose())
 	{
 		glfwPollEvents();
+		m_renderer->RenderFrame();
 	}
 
 	m_renderer->Cleanup();

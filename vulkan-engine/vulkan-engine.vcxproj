@@ -21,10 +21,14 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="Graphics\RenderCommand.h" />
+    <ClInclude Include="Graphics\RenderCommandBuffer.h" />
     <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Graphics\RenderSubmissionQueue.h" />
     <ClInclude Include="Graphics\Shader.h" />
     <ClInclude Include="Utility\Config.h" />
     <ClInclude Include="Utility\Version.h" />
+    <ClInclude Include="Vulkan\VulkanCommandManager.h" />
     <ClInclude Include="Vulkan\VulkanCommon.h" />
     <ClInclude Include="Vulkan\VulkanDevice.h" />
     <ClInclude Include="Vulkan\VulkanGraphicsPipeline.h" />
@@ -32,19 +36,24 @@
     <ClInclude Include="Vulkan\VulkanRenderPass.h" />
     <ClInclude Include="Vulkan\VulkanStructs.h" />
     <ClInclude Include="Vulkan\VulkanSwapChain.h" />
+    <ClInclude Include="Vulkan\VulkanSyncObjects.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Graphics\RenderCommandBuffer.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\RenderSubmissionQueue.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
     <ClCompile Include="Utility\Version.cpp" />
+    <ClCompile Include="Vulkan\VulkanCommandManager.cpp" />
     <ClCompile Include="Vulkan\VulkanDevice.cpp" />
     <ClCompile Include="Vulkan\VulkanGraphicsPipeline.cpp" />
     <ClCompile Include="Vulkan\VulkanInstance.cpp" />
     <ClCompile Include="Vulkan\VulkanRenderPass.cpp" />
     <ClCompile Include="Vulkan\VulkanSwapchain.cpp" />
+    <ClCompile Include="Vulkan\VulkanSyncObjects.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

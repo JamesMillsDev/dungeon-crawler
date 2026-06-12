@@ -1,14 +1,19 @@
 #pragma once
 
+#include <mutex>
+
 #include "VulkanCommon.h"
 
 class VulkanDevice;
 
 struct GLFWwindow;
 
+using std::mutex;
+
 class VulkanSwapChain
 {
 	friend class Renderer;
+	friend VulkanDevice;
 
 private:
 	static VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const vector<VkSurfaceFormatKHR>& availableFormats);
@@ -25,6 +30,8 @@ private:
 	VulkanDevice* m_device;
 	VkSurfaceKHR m_surface;
 	GLFWwindow* m_windowHandle;
+
+	mutable mutex m_accessMutex;
 
 private:
 	explicit VulkanSwapChain(VulkanDevice* logicalDevice, VkSurfaceKHR surface, GLFWwindow* windowHandle);

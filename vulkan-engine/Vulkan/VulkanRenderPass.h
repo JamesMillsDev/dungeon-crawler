@@ -7,6 +7,7 @@ class VulkanDevice;
 class VulkanRenderPass
 {
 	friend class Renderer;
+	friend VulkanDevice;
 
 private:
 	VkRenderPass m_renderPass;

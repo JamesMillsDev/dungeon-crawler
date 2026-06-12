@@ -20,3 +20,5 @@ const vector DEVICE_EXTENSIONS =
 {
 	VK_KHR_SWAPCHAIN_EXTENSION_NAME
 };
+
+constexpr int MAX_FRAMES_IN_FLIGHT = 2;
