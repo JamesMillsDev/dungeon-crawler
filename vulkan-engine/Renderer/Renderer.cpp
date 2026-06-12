@@ -9,9 +9,9 @@
 #include "Vulkan/VulkanRenderPass.h"
 #include "Vulkan/VulkanSwapChain.h"
 #include "Vulkan/VulkanSyncObjects.h"
-#include "Vulkan/VulkanVertexBuffer.h"
+#include "Vulkan/VulkanBuffer.h"
 
-VulkanVertexBuffer* vertexBuffer = nullptr;
+VulkanBuffer* vertexBuffer = nullptr;
 
 Renderer::Renderer(Config* config, Window* window)
 	: m_window{ window },
@@ -88,7 +88,12 @@ void Renderer::Initialise()
 	// Start the submission thread - runs until Cleanup() calls Shutdown()
 	m_submissionThread = std::thread{ &Renderer::SubmissionLoop, this };
 
-	vertexBuffer = new VulkanVertexBuffer{ sizeof(Vertex), vertices.size(), m_vulkanDevice };
+	vertexBuffer = new VulkanBuffer
+	{ 
+		m_vulkanDevice, sizeof(Vertex), vertices.size(), 
+		VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+		VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+	};
 	vertexBuffer->Create();
 
 	vertexBuffer->Fill(vertices.data());

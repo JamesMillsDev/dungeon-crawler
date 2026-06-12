@@ -1,4 +1,4 @@
-#include "VulkanVertexBuffer.h"
+#include "VulkanBuffer.h"
 
 #include <stdexcept>
 
@@ -6,33 +6,32 @@
 
 using std::runtime_error;
 
-VulkanVertexBuffer::VulkanVertexBuffer(const size_t vertexSize, const size_t vertexCount, VulkanDevice* device)
-	: m_vertexBuffer{ VK_NULL_HANDLE }, m_vertexBufferMemory{ VK_NULL_HANDLE }, m_vertexSize{ vertexSize },
-	m_vertexCount{ vertexCount }, m_device{ device }
-{
+VulkanBuffer::VulkanBuffer(VulkanDevice* device, const size_t vertexSize, const size_t vertexCount, const VkBufferUsageFlags usage,
+	const VkMemoryPropertyFlags memoryFlags, const VkSharingMode sharing) :
+	m_vertexBuffer{ VK_NULL_HANDLE }, m_vertexBufferMemory{ VK_NULL_HANDLE }, m_usage{ usage }, m_sharing{ sharing },
+	m_memoryFlags{ memoryFlags }, m_vertexSize{ vertexSize }, m_vertexCount{ vertexCount }, m_device{ device }
+{}
 
-}
-
-void VulkanVertexBuffer::Fill(const void* vertices) const
+void VulkanBuffer::Fill(const void* bufferData) const
 {
 	void* data;
 	vkMapMemory(m_device->Logical(), m_vertexBufferMemory, 0, m_vertexSize * m_vertexCount, 0, &data);
-	memcpy(data, vertices, m_vertexSize * m_vertexCount);
+	memcpy(data, bufferData, m_vertexSize * m_vertexCount);
 	vkUnmapMemory(m_device->Logical(), m_vertexBufferMemory);
 }
 
-VkBuffer VulkanVertexBuffer::Get() const
+VkBuffer VulkanBuffer::Get() const
 {
 	return m_vertexBuffer;
 }
 
-void VulkanVertexBuffer::Create()
+void VulkanBuffer::Create()
 {
 	VkBufferCreateInfo bufferInfo{};
 	bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
 	bufferInfo.size = m_vertexSize * m_vertexCount;
-	bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-	bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+	bufferInfo.usage = m_usage;
+	bufferInfo.sharingMode = m_sharing;
 
 	if (vkCreateBuffer(m_device->Logical(), &bufferInfo, nullptr, &m_vertexBuffer) != VK_SUCCESS)
 	{
@@ -46,8 +45,8 @@ void VulkanVertexBuffer::Create()
 	allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 	allocInfo.allocationSize = memRequirements.size;
 	allocInfo.memoryTypeIndex = FindMemoryType(
-		memRequirements.memoryTypeBits, 
-		VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+		memRequirements.memoryTypeBits,
+		m_memoryFlags
 	);
 
 	if (vkAllocateMemory(m_device->Logical(), &allocInfo, nullptr, &m_vertexBufferMemory) != VK_SUCCESS)
@@ -58,13 +57,13 @@ void VulkanVertexBuffer::Create()
 	vkBindBufferMemory(m_device->Logical(), m_vertexBuffer, m_vertexBufferMemory, 0);
 }
 
-void VulkanVertexBuffer::Cleanup()
+void VulkanBuffer::Cleanup()
 {
 	vkDestroyBuffer(m_device->Logical(), m_vertexBuffer, nullptr);
 	vkFreeMemory(m_device->Logical(), m_vertexBufferMemory, nullptr);
 }
 
-uint32_t VulkanVertexBuffer::FindMemoryType(const uint32_t typeFilter, const VkMemoryPropertyFlags properties) const
+uint32_t VulkanBuffer::FindMemoryType(const uint32_t typeFilter, const VkMemoryPropertyFlags properties) const
 {
 	VkPhysicalDeviceMemoryProperties memProperties;
 	vkGetPhysicalDeviceMemoryProperties(m_device->Physical(), &memProperties);

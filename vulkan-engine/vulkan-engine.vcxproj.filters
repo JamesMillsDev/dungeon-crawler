@@ -95,7 +95,7 @@
     <ClInclude Include="Graphics\Mesh.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Vulkan\VulkanVertexBuffer.h">
+    <ClInclude Include="Renderer\Vulkan\VulkanBuffer.h">
       <Filter>Header Files\Renderer\Vulkan</Filter>
     </ClInclude>
   </ItemGroup>
@@ -148,7 +148,7 @@
     <ClCompile Include="Graphics\Mesh.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Vulkan\VulkanVertexBuffer.cpp">
+    <ClCompile Include="Renderer\Vulkan\VulkanBuffer.cpp">
       <Filter>Source Files\Renderer\Vulkan</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,7 +7,7 @@
 
 #include <vulkan/vulkan.h>
 
-class VulkanVertexBuffer;
+class VulkanBuffer;
 
 struct Vertex
 {
@@ -49,4 +49,4 @@ const std::vector<Vertex> vertices = {
 	{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
 };
 
-extern VulkanVertexBuffer* vertexBuffer; // TODO: Make this concurrent and individual not for all renderer
+extern VulkanBuffer* vertexBuffer; // TODO: Make this concurrent and individual not for all renderer

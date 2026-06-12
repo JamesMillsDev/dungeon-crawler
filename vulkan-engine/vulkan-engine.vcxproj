@@ -36,7 +36,7 @@
     <ClInclude Include="Renderer\Vulkan\VulkanStructs.h" />
     <ClInclude Include="Renderer\Vulkan\VulkanSwapChain.h" />
     <ClInclude Include="Renderer\Vulkan\VulkanSyncObjects.h" />
-    <ClInclude Include="Renderer\Vulkan\VulkanVertexBuffer.h" />
+    <ClInclude Include="Renderer\Vulkan\VulkanBuffer.h" />
     <ClInclude Include="Utility\Config.h" />
     <ClInclude Include="Utility\Version.h" />
     <ClInclude Include="Window.h" />
@@ -55,7 +55,7 @@
     <ClCompile Include="Renderer\Vulkan\VulkanRenderPass.cpp" />
     <ClCompile Include="Renderer\Vulkan\VulkanSwapchain.cpp" />
     <ClCompile Include="Renderer\Vulkan\VulkanSyncObjects.cpp" />
-    <ClCompile Include="Renderer\Vulkan\VulkanVertexBuffer.cpp" />
+    <ClCompile Include="Renderer\Vulkan\VulkanBuffer.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
     <ClCompile Include="Utility\Version.cpp" />
     <ClCompile Include="Window.cpp" />

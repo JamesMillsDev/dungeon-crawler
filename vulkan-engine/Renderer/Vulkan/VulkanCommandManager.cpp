@@ -5,7 +5,7 @@
 
 #include "VulkanDevice.h"
 #include "VulkanStructs.h"
-#include "VulkanVertexBuffer.h"
+#include "VulkanBuffer.h"
 #include "Graphics/Mesh.h"
 
 using std::runtime_error;
